@@ -12,7 +12,7 @@ function routeConfig ($stateProvider) {
   // Routes
   $stateProvider
     .state('public', {
-      abstract: true,
+      absract: true,
       templateUrl: 'src/public/public.html'
     })
     .state('public.home', {
@@ -41,11 +41,22 @@ function routeConfig ($stateProvider) {
         }]
       }
     })
-    .state('public.newsitems', {
-      url: '/menu/news/',
-      templateUrl: 'src/public/news-items/news-items.html',
-      controller: 'NewsItemsController',
-      controllerAs: 'newsItemsCtrl'
+    .state('public.menu-news', {
+      url: '/menu-news',
+      templateUrl: 'src/public/menu-news/menu-news.html',
+      controller: 'MenuNewsController',
+      controllerAs: 'menuNewsCtrl'
+    })
+    .state('public.myinfo', {
+      url: '/myinfo',
+      templateUrl: 'src/public/myinfo/myinfo.html',
+      controller: 'MyInfoController',
+      controllerAs: 'myInfoCtrl',
+      resolve: {
+        info: ['MyInfoService', function(MyInfoService) {
+          return MyInfoService.getInfo();
+        }]
+      }
     });
 }
 })();
